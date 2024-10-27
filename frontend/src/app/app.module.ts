@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CadastroComponent } from './user/cadastro.component';
-import { HeadersComponent } from './header.component'; // Certifique-se de que está importado
+import { HeadersComponent } from './header.component';
 import { AuthenticationComponent } from './user/login.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -13,8 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     AppComponent,
     CadastroComponent,
-    HeadersComponent, // Adicione o HeadersComponent aqui
-    AuthenticationComponent // Adicione o AuthenticationComponent aqui
+    HeadersComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +23,6 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] // Ensure AppComponent is bootstrapped here
 })
 export class AppModule { }
