@@ -3,8 +3,17 @@ var router = express.Router();
 const User = require('../models/user');
 const BookAnalyst = require('../models/BookAnalyst'); // Importando para garantir o registro
 const Book = require('../models/book');
+const jwt  =require('jsonwebtoken')
+const SECRET = "PAWTRAB02"
 
-
+function verifyJWT(req,res,next){
+    const token = req.headers['x-access-token'];
+    jwt.verify(token, SECRET, (err,decoded)=> {
+        if(err) return res.status(401).end();
+        req.userId = decoded.id;
+        next()
+    })
+}
 
 
 // GET: Recuperar todos os usuários
@@ -64,6 +73,33 @@ router.post('/', async function (req, res, next) {
     }
 });
 
+
+router.post('/login', async function (req, res, next) {
+    const { email, password } = req.body;
+
+    // Busca o usuário no banco de dados
+    const user = await User.findOne({ email });
+    
+    // Verifica se o usuário existe e a senha está correta
+    if (!user || password!== user.password) {
+        console.log("Email ou senha inválidos");
+        return res.status(404).json({
+            myErrorTitle: "Server-Side: Usuário não encontrado",
+            myError: "Nenhum usuário foi encontrado com o email fornecido."
+        });
+    }
+
+    // Gera o token
+    const token = jwt.sign({ id: user._id, name:user.name,bookAnalyst:user.bookAnalyst }, SECRET, { expiresIn: 500 });
+
+    // Responde com o token de autenticação
+    return res.status(200).json({
+        auth: true,
+        token
+    });
+});
+
+
 // DELETE: Deletar um usuário pelo ID
 router.delete('/:id', async function (req, res, next) {
     const userId = req.params.id;
@@ -95,7 +131,7 @@ router.delete('/:id', async function (req, res, next) {
 });
 
 // PATCH: Atualizar um usuário pelo ID (agora com upload de nova foto de perfil)
-router.patch('/:id', async function (req, res, next) {
+router.patch('/:id',verifyJWT,async function (req, res, next) {
     const userId = req.params.id;
     const { name, password, email, } = req.body;
 
@@ -126,44 +162,10 @@ router.patch('/:id', async function (req, res, next) {
     }
 });
 
-router.post('/signin', async (req, res) => {
-    const { email, password } = req.body;
-  
-    // Verifica se o email foi fornecido
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email e senha são obrigatórios.' });
-    }
-  
-    try {
-      // Busca o usuário pelo email no banco de dados
-      const user = await User.findOne({ email });
-  
-      // Se o usuário não for encontrado
-      if (!user) {
-        return res.status(404).json({ message: 'Usuário não encontrado.' });
-      }
-  
-      // Compara a senha fornecida com a senha criptografada no banco de dados
-      const isMatch = await password === user.password;
-  
-      // Se a senha estiver correta
-      if (isMatch) {
-        // Retorna uma resposta de sucesso, por exemplo, um token JWT ou mensagem de sucesso
-        res.status(200).json({ message: 'Login bem-sucedido.', objUserRecuperados: user});
-      } else {
-        // Se a senha não coincidir
-        res.status(400).json({ message: 'Senha inválida.' });
-      }
-  
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Erro no servidor.' });
-    }
-  });
 
 
 // BookAnalyst
-router.get('/:userId/review', async function (req, res, next) {
+router.get('/:userId/review',verifyJWT ,async function (req, res, next) {
     try {
         const userId = req.params.userId;
         const user = await User.findById(userId).populate('bookAnalyst');  // Correção: await adicionado
