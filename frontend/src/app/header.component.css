@@ -1,0 +1,46 @@
+/* Estilos básicos para o cabeçalho */
+header {
+  background-color: #f8f9fa; /* Cor de fundo */
+  padding: 10px 20px; /* Espaçamento interno */
+  border-bottom: 1px solid #ddd; /* Linha inferior */
+}
+
+/* Estilos para a navegação */
+nav {
+  display: flex; /* Layout flexível */
+  justify-content: space-between; /* Espaçamento entre os itens */
+  align-items: center; /* Alinhamento vertical */
+}
+
+/* Estilos para a lista de navegação */
+nav ul {
+  list-style: none; /* Remove marcadores de lista */
+  padding: 0; /* Remove espaçamento interno */
+  margin: 0; /* Remove margem */
+  display: flex; /* Layout flexível */
+  gap: 15px; /* Espaçamento entre os itens */
+}
+
+/* Estilos para os itens da lista */
+nav ul li {
+  display: inline; /* Exibição em linha */
+}
+
+/* Estilos para os links de navegação */
+nav ul li a {
+  text-decoration: none; /* Remove sublinhado */
+  color: #007bff; /* Cor do texto */
+  font-weight: bold; /* Negrito */
+}
+
+/* Estilos para os links de navegação ao passar o mouse */
+nav ul li a:hover {
+  color: #0056b3; /* Cor do texto ao passar o mouse */
+}
+
+/* Estilos para o logotipo */
+.logo {
+  font-size: 24px; /* Tamanho da fonte */
+  font-weight: bold; /* Negrito */
+  color: #333; /* Cor do texto */
+}

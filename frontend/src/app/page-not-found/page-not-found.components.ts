@@ -6,7 +6,7 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
     standalone: true,
     imports: [RouterLink,RouterLinkActive],
     templateUrl:'./page-not-found.components.html',
-    styles : 
+    styles :
     `
         div{
             background-color: #f8f9fa;

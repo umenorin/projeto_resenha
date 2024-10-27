@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="logo">
+    <img src="assets/logo.png" alt="LeLibre Logo" />
+    <h1>LELIBRE</h1>
+    <p>conhecimento ao alcance</p>
+  </div>
+  <h2>Bem-vindo à Biblioteca Virtual!</h2>
+  <p>
+    Olá Usuário! Faça o seu cadastro fornecendo o seu e-mail, senha. Caso tenha
+    alguma dúvida, sinta-se à vontade para entrar em contato com a equipe de
+    suporte.
+  </p>
+  <div class="avatar">
+    <img src="assets/avatar.png" alt="Avatar" />
+    <p>É seu primeiro acesso?</p>
+  </div>
+  <form (ngSubmit)="onSubmit(cadastroForm)" #cadastroForm="ngForm">
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" name="nome" ngModel required />
+    <label for="sobrenome">Sobrenome</label>
+    <input type="text" id="sobrenome" name="sobrenome" ngModel required />
+    <label for="email">E-mail</label>
+    <input type="email" id="email" name="email" ngModel required />
+    <label for="senha">Senha</label>
+    <input type="password" id="senha" name="senha" ngModel required />
+    <label for="confirmacaoSenha">Confirmação de Senha</label>
+    <input type="password" id="confirmacaoSenha" name="confirmacaoSenha" ngModel required />
+    <div class="checkbox">
+      <input type="checkbox" id="termos" name="termos" ngModel required />
+      <label for="termos">
+        Li e concordo com as políticas de cadastro da Biblioteca Virtual Le Libre.
+      </label>
+    </div>
+    <button type="submit" [disabled]="!cadastroForm.valid || isLoading">Cadastrar-Se</button>
+    <div *ngIf="isLoading">Carregando...</div>
+  </form>
+  <a href="#">Suporte</a>
+</div>
