@@ -1,1 +1,64 @@
-<p>signup works!</p>
+<h1>SIGN UP</h1>
+<div class="col-md-8 col-md-offset-2">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="firstName">Nome:</label><br/>
+      <input type="text" id="name" class="form-control" formControlName="nameTS">
+    </div>
+    @if(myForm.get('nameTS')?.errors?.['required'] && myForm.get('nameTS')?.touched){
+        <div><p style="color: red;">NOME OBRIGATÓRIO</p></div>
+    }
+    <br/>
+    
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" class="form-control" formControlName="emailTS">
+    </div>
+    @if(myForm.get('emailTS')?.errors?.['required'] && myForm.get('emailTS')?.touched){
+        <div><p style="color: red;">EMAIL OBRIGATÓRIO</p></div>
+    }
+    @if(myForm.get('emailTS')?.errors?.['email'] && myForm.get('emailTS')?.touched){
+        <div><p style="color: red;">EMAIL INVÁLIDO</p></div>
+    }
+    <br/>
+
+    <!-- Senha -->
+    <div class="form-group">
+      <label for="pass">Senha:</label>
+      <input type="password" id="pass" class="form-control" formControlName="passwordTS">
+    </div>
+    @if(myForm.get('passwordTS')?.errors?.['required'] && myForm.get('passwordTS')?.touched){
+        <div><p style="color: red;">SENHA OBRIGATÓRIA</p></div>
+    }
+    <br/>
+
+    <!-- Confirmar Senha -->
+    <div class="form-group">
+      <label for="confirmPass">Confirmar Senha:</label>
+      <input type="password" id="confirmPass" class="form-control" formControlName="confirmPasswordTS">
+    </div>
+    @if(myForm.errors?.['passwordMismatch'] && myForm.get('confirmPasswordTS')?.touched){
+        <div><p style="color: red;">AS SENHAS NÃO COINCIDEM</p></div>
+    }
+    <br/>
+
+    <!-- Termos de Uso -->
+    <div class="form-group">
+      <label>
+        <input type="checkbox" formControlName="termsAcceptedTS"> Eu aceito os Termos de Uso para me dedicar a programação
+      </label>
+    </div>
+
+    @if(myForm.get('termsAcceptedTS')?.errors?.['requiredTrue'] && myForm.get('termsAcceptedTS')?.touched){
+      <div><p style="color: red;">Você deve aceitar os Termos de Uso para continuar</p></div>
+    }
+    <br/>
+
+    <!-- Botão de Enviar -->
+    <br/>
+    <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Cadastrar</button>
+  </form>
+</div>
