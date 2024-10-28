@@ -10,7 +10,7 @@ import { Router } from "@angular/router";  // Importa o serviço de roteamento
 })
 export class SignupComponent implements OnInit{
     myForm!: FormGroup;
-    successMessage: string | null = null;  // Variável para armazenar a mensagem de sucesso
+    successMessage: string  = "";  // Variável para armazenar a mensagem de sucesso
 
     constructor(private userService: UserService, private router:Router) {}
 
