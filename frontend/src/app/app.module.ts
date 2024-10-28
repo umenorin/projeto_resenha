@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CadastroComponent } from './user/cadastro.component';
@@ -14,15 +14,16 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     CadastroComponent,
     HeadersComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent] // Ensure AppComponent is bootstrapped here
+  bootstrap: [AppComponent], // Ensure AppComponent is bootstrapped here
 })
-export class AppModule { }
+export class AppModule {}

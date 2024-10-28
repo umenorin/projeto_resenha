@@ -1,0 +1,58 @@
+<div class="login-container">
+  <div class="logo">
+    <img src="assets/logo.png" alt="Logo LELIBRE" />
+    <h1>LELIBRE</h1>
+    <p>comunidade de leitores</p>
+  </div>
+  <h2>Bem-vindo à Biblioteca Virtual!</h2>
+  <p class="description">
+    Explore um mundo de conhecimento com facilidade. Acesse nossa coleção de
+    livros eletrônicos e artigos. Encontre o que procura, salve favoritos e leia
+    de onde parou. Sua jornada literária começa aqui.
+  </p>
+  <div class="icon">
+    <img src="assets/icon.png" alt="Mundo aberto em um livro" />
+  </div>
+  <h3>Realize seu login</h3>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label for="email">E-mail</label>
+    <input
+      type="email"
+      id="email"
+      formControlName="email"
+      placeholder="Digite seu e-mail"
+    />
+    <div
+      *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+      class="error-message"
+    >
+      <span *ngIf="loginForm.get('email')?.errors?.['required']"
+        >O campo E-mail é obrigatório.</span
+      >
+      <span *ngIf="loginForm.get('email')?.errors?.['email']"
+        >Insira um e-mail válido.</span
+      >
+    </div>
+
+    <label for="password">Senha</label>
+    <input
+      type="password"
+      id="password"
+      formControlName="password"
+      placeholder="Digite sua senha"
+    />
+    <div
+      *ngIf="
+        loginForm.get('password')?.touched && loginForm.get('password')?.invalid
+      "
+      class="error-message"
+    >
+      <span *ngIf="loginForm.get('password')?.errors?.['required']"
+        >O campo Senha é obrigatório.</span
+      >
+    </div>
+
+    <button type="submit" class="register-button">Loga-se</button>
+  </form>
+</div>
