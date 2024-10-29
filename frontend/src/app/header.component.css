@@ -1,0 +1,20 @@
+header {
+height: 20px;              /* Temporariamente mais espessa */
+  background-color: #5575DF;
+  width: 100%;
+}
+img {
+    display: block;
+    margin: auto;
+}
+nav{
+    background-color: #E0E0E0;
+    border: 1px solid #4A4A4A;
+}
+ul{
+    display: flex;
+    list-style-type:none;
+}
+li{
+    margin: auto;
+}

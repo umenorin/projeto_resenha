@@ -4,12 +4,12 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 import { map,tap } from 'rxjs/operators';
 
-
 @Injectable({providedIn:'root'})
 export class UserService{
     private baseUrl = 'http://localhost:3000/user';
     private _currentUser = new BehaviorSubject<User | null>(null); // Inicializa com null
     public currentUser: Observable<User | null> = this._currentUser.asObservable();
+    private token: string | null = null;
 
     constructor(private http: HttpClient) {
 
@@ -24,26 +24,54 @@ export class UserService{
         return this.http.post<User>(`${this.baseUrl}`, user);
     }
 
-    login(email: string, password: string): Observable<User> {
-        // Exemplo de login simulado
-        return this.http.post<User>(`${this.baseUrl}/login`, { email, password })
-        .pipe(
-            tap((response: any) => {
-              const user = response?.objUserRecuperados || response; // Ajuste conforme necessário
-              if (user) {
-                this._currentUser.next(user);
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                console.log("Usuário logado com sucesso:", user);
-              } else {
-                console.error("Erro: estrutura de resposta inesperada", response);
-              }
-            })
-          );
-          
-      }
+
+    login(email: string, password: string): Observable<{ token: string }> {
+        console.log("Método login chamado no UserService");
+        return this.http.post<{ token: string }>(`${this.baseUrl}/login`, { email, password })
+            .pipe(
+                tap((response) => {
+                    this.token = response.token;  // Armazena o token recebido
     
-      logout() {
-        this._currentUser.next(null); // Limpa o usuário logado
-        localStorage.removeItem('currentUser'); // Remove o usuário do localStorage
-      }
+                    if (this.token) {
+
+                      const decodedToken = this.decodeJwt(this.token) as User;
+                      console.log("Token decodificado:", decodedToken);
+                      this._currentUser.next(decodedToken);
+                      localStorage.setItem('token', this.token);
+                      localStorage.setItem('currentUser', JSON.stringify(decodedToken));
+                        console.log("Usuário logado com sucesso:", decodedToken);
+                    } else {
+                        console.error("Erro: estrutura de resposta inesperada", response);
+                    }
+                })
+            );
+    }
+    
+  
+    // Método para retornar o token JWT quando necessário, por exemplo, em um interceptor HTTP
+    getToken(): string | null {
+      return this.token;
+    }
+    
+    logout() {
+      this._currentUser.next(null); // Limpa o usuário logado
+      localStorage.removeItem('currentUser'); // Remove o usuário do localStorage
+    }
+
+    decodeJwt(token: string): any {
+      // Divide o token em partes
+      const base64Url = token.split('.')[1];  // A segunda parte é o payload
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  
+      // Decodifica de Base64 para string
+      const jsonPayload = decodeURIComponent(
+          atob(base64)
+              .split('')
+              .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+              .join('')
+      );
+  
+      return JSON.parse(jsonPayload);  // Retorna o payload como um objeto JSON
+  }
+  
 }

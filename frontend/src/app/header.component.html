@@ -1,10 +1,16 @@
-<header class="row">
-    <nav class="col-md-8 col-md-offset-2">
-        <ul class="nav nav-pills">
-            <li style="display: contents;">
-                <a class="nav-link" [routerLink]="['/mensagens']"   routerLinkActive="active">Mensagens</a>
-                <a class="nav-link" [routerLink]="['/user']"   routerLinkActive="active">Autenticação</a>
+<header></header>
+<body>
+    <img src="../assets/logo.png" alt="logo">
+
+</body>
+<footer>
+    <nav>
+        <ul>
+            <li>
+                <a class="nav-link" [routerLink]="['/home/recomendacao']" routerLinkActive="active">Recomendados</a>
             </li>
+            <li><a class="nav-link" [routerLink]="['/home/resenhas']" routerLinkActive="active">Resenhas</a></li>
+            <li><a class="nav-link" [routerLink]="['/home/livros']" routerLinkActive="active">Livros</a></li>
         </ul>
     </nav>
-</header>
+</footer>

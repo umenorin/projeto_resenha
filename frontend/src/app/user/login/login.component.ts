@@ -14,7 +14,6 @@ import { UserService } from '../../services/user.service';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-
   constructor(private router: Router,private userService: UserService) {}
 
   onSubmit() {
@@ -26,6 +25,7 @@ export class LoginComponent {
       response => {
         // Sucesso no login
         console.log('Login bem-sucedido:', response);
+        this.router.navigate(['/home']);
       },
       error => {
         // Falha no login

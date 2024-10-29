@@ -1,0 +1,37 @@
+.body{
+    background-color: #F3F4F6;
+    padding: 0px 20px;
+}
+.book-container {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap; /* Para quebrar a linha se não houver espaço suficiente */
+    justify-content: space-between;
+  }
+  
+  /* Ajuste a classe .book-item se necessário */
+  .book-item {
+    display: inline; /* Para garantir que os itens se alinhem corretamente */
+    align-items: center;
+    margin-bottom: 10px; /* Mantém o espaçamento inferior entre as linhas */
+  }
+  
+  /* O restante do seu CSS permanece o mesmo */
+  .book-img {
+    width: 145px;
+    height: 218px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .book-item p {
+    margin: auto;
+    max-width: 150px; 
+    white-space: normal; 
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+a {
+    text-decoration: none;
+    color: black;
+}

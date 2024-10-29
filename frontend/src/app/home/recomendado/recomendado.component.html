@@ -1,0 +1,31 @@
+<div class="body">
+    <h2>Literatura Sci-Fi</h2>
+    <div class="book-container">
+        <div *ngFor="let book of sciFiBooks" class="book-item">
+            <a [routerLink]="['/home/livros', book._id]"> <!-- Usando o routerLink para navegação -->
+                <img [src]="book.img" alt="{{ book.title }}" class="book-img" />
+                <p>{{ book.title }}</p>
+            </a>
+        </div>
+    </div>
+  
+    <h2>Literaturas de Romance</h2>
+    <div class="book-container">
+        <div *ngFor="let book of romanceBooks" class="book-item">
+            <a [routerLink]="['/home/livros', book._id]"> <!-- Usando o routerLink para navegação -->
+                <img [src]="book.img" alt="{{ book.title }}" class="book-img" />
+                <p>{{ book.title }}</p>
+            </a>
+        </div>
+    </div>
+  
+    <h2>Literaturas de Aventura</h2>
+    <div class="book-container">
+        <div *ngFor="let book of adventureBooks" class="book-item">
+            <a [routerLink]="['/home/livros', book._id]"> <!-- Usando o routerLink para navegação -->
+                <img [src]="book.img" alt="{{ book.title }}" class="book-img" />
+                <p>{{ book.title }}</p>
+            </a>
+        </div>
+    </div>
+</div>
