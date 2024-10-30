@@ -1,0 +1,68 @@
+.lib-container{
+    display: flex;
+}
+
+.book-img{
+    width: 17rem;
+}
+.text-information{
+    padding: 10px;
+}
+
+
+  /* Fundo com 5 estrelas vazias */
+  .star-rating::before {
+    content: "★★★★★";
+    color: #e0e0e0; /* Cor das estrelas vazias */
+  }
+  
+  /* Estrelas preenchidas */
+
+  .rating-stars {
+    position: relative;
+    width: 100px; /* Define o tamanho total das estrelas */
+    height: 20px;
+    background: url('../../../assets/star_empty.png') repeat-x;
+    background-size: 20px 20px;
+
+    margin: 0 .5rem;
+  }
+  
+  .stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    background: url('../../../assets/star_full.png') repeat-x;
+    background-size: 20px 20px;
+    width: 0%;
+  }
+  .rating-container{
+    display: flex;
+
+    align-items: center;
+  }
+  
+  .rating-number{
+    margin-left: 1rem;
+    font-size: 0.8em;
+    color: #fdc10b;
+    font-weight: 700;
+  }
+
+  .rating-count {
+    text-decoration: underline;
+    color: rgba(0, 0, 0, 0.726);
+  }
+  .btn-resenha{
+    background-color: #00000000;
+    border-radius: 10px;
+    width: 250px;
+    border: 2px solid #5575DF;
+  }
+  .btn-resenha:hover{
+    background-color: #5575DF;
+    border-radius: 10px;
+    width: 250px;
+    border: 2px solid black;
+  }

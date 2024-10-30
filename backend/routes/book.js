@@ -12,7 +12,23 @@ router.get('/', async function (req, res, next){
         });
     }catch(err){
         return res.status(500).json({
-            myErrorTItle: "Serve-Side: Um erro aconteceu ao buscar as MensagenS",
+            myErrorTItle: "Serve-Side: Um erro aconteceu ao buscar os livros",
+            myError: err
+        })
+    }
+});
+
+router.get('/:id', async function (req, res, next){
+    try{
+        const bookId = req.params.id;
+        const book = await Book.findById(bookId).populate('bookAnalyst');  // Populate the user field
+        res.status(200).json({
+            myMsgSucesso: "Mensagens recuperadas com sucesso",
+            objSMessageSRecuperadoS: book
+        });
+    }catch(err){
+        return res.status(500).json({
+            myErrorTItle: "Serve-Side: Um erro aconteceu ao buscar o livro",
             myError: err
         })
     }

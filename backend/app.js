@@ -5,6 +5,7 @@ var path = require('path');
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user')
 const bookRoutes = require('./routes/book')
+const bookAnalystRoutes = require('./routes/bookAnalyst')
 const booksData = require('./seeds/booksData'); // Caminho para o arquivo booksData.js
 const Book =require('./models/book')
 
@@ -46,6 +47,8 @@ app.use((req, res, next) => {
 
 app.use('/user',userRoutes)
 app.use('/book',bookRoutes)
+app.use('/bookAnalyst',bookAnalystRoutes)
+
 
 // catch 404 and forward to error handler 
 app.use(function (req, res, next) {

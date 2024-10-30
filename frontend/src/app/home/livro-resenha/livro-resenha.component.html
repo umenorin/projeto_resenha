@@ -1,1 +1,33 @@
-<p>livro-resenha works!</p>
+<div>
+    <div class="lib-container">
+        <img [src]="book?.img" alt="{{ book?.title }}" class="book-img" />
+        <div class="text-information">
+            <h2>{{ book?.title }} - {{ book?.edition }} edição ({{ book?.gender }})</h2>
+            <p>Criado por: {{ book?.author }}</p>
+            <p>Editora: {{ book?.publisher }}</p>
+            <!-- Estrelas de Avaliação -->
+            <div class="rating-container">
+                <div class="rating-number">{{book.rating }}</div>
+                <div class="rating-stars">
+                    <div class="stars" [style.width.%]="(book?.rating || 0) * 20"> </div>
+                </div>
+                <div class="rating-count">{{book.bookAnalyst.length}} avaliacoes</div>    
+            </div>
+            <hr>
+            <p><strong>Faça uma resenha</strong></p>
+            <p>Faça uma resenha para dizer o que voce achou sobre essa obra</p>
+            <button class="btn-resenha" (click)="createBookAnalyst(book?._id)">Criar Resenha</button>
+        </div>
+        
+    </div>
+  
+    <hr/>
+    <div *ngIf="book && book.bookAnalyst && book.bookAnalyst.length > 0; else noResenha">
+        <div *ngFor="let resenha of book.bookAnalyst">
+            <app-resenha-informacao [resenha]="resenha"></app-resenha-informacao>
+        </div>
+    </div>
+    <ng-template #noResenha>
+        <p>Esse livro ainda não tem nenhuma resenha.</p>
+    </ng-template>
+</div>

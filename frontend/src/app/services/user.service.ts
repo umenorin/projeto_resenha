@@ -19,7 +19,9 @@ export class UserService{
         this._currentUser.next(storedUser); // Se já estiver logado, emite o usuário
         }
     }
-
+    getUser(id:string): Observable<User> {
+        return this.http.get<User>(this.baseUrl+`/${id}`);
+      }
     createUser(user: User): Observable<User> {
         return this.http.post<User>(`${this.baseUrl}`, user);
     }

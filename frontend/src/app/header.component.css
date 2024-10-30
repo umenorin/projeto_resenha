@@ -1,4 +1,4 @@
-header {
+.line {
 height: 20px;              /* Temporariamente mais espessa */
   background-color: #5575DF;
   width: 100%;
@@ -17,4 +17,7 @@ ul{
 }
 li{
     margin: auto;
+}
+nav{
+    margin-bottom: 20px;
 }

@@ -8,6 +8,7 @@ export class Book{
         public author: string,
         public edition: string,
         public publisher: string,
+        public rating:number,
         public gender: string,
         public img: string,
 

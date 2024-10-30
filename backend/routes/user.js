@@ -245,6 +245,7 @@ router.post('/:userId/:bookId', async function (req, res, next) {
             rating,
             autor: user._id
         });
+        book.rating = ((book.rating * book.bookAnalyst.length) +rating) / (book.bookAnalyst.length + 1)
         // Salva o novo `bookAnalyst`
         const bookAnalystSaved = await bookAnalyst.save();
 

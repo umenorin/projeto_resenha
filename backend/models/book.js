@@ -7,6 +7,7 @@ const schema= new Schema({
     edition: {type: String, required: true},
     publisher: {type: String, required: true},
     gender: {type: String, required: true},
+    rating:{type:Number, default:0},
     img: {type: String, required: true},
 
     bookAnalyst: [{type: Schema.Types.ObjectId, ref: 'BookAnalyst'}],
