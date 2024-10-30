@@ -1,1 +1,42 @@
-<p>createbook-analyst works!</p>
+{{ currentUserId }}
+<h1>SIGN UP</h1>
+<div class="col-md-8 col-md-offset-2">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="firstName">Título da resenha:</label><br/>
+      <input type="text" id="name" class="form-control" formControlName="titleTS">
+    </div>
+    @if(myForm.get('titleTS')?.errors?.['required'] && myForm.get('titleTS')?.touched){
+        <div><p style="color: red;">TITULO OBRIGATÓRIO</p></div>
+    }
+    <br/>
+    
+    <div class="form-group">
+      <label for="email">Descrição da resenha:</label>
+      <input type="email" id="email" class="form-control" formControlName="contentTS">
+    </div>
+    @if(myForm.get('contentTS')?.errors?.['required'] && myForm.get('contentTS')?.touched){
+        <div><p style="color: red;">DESCRIÇÃO OBRIGATÓRIA</p></div>
+    }
+    <br/>
+    
+    <div class="rating-container">
+        <div *ngFor="let star of stars; let i = index" 
+             (click)="setRating(i + 1)" 
+             (mouseover)="hoverRating(i + 1)" 
+             (mouseleave)="resetHover()">
+          <img [src]="getStarImage(i)" [ngClass]="{'star-hover': hoveredRating >= i + 1}" class="star-img" />
+        </div>
+      </div>
+      
+    
+    <!-- Botão de Enviar -->
+    <br/>
+    <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Cadastrar</button>
+  </form>
+  <!-- Mensagem de sucesso exibida condicionalmente -->
+  <div>
+    <span>{{ successMessage }}</span>
+  </div>
+</div>
