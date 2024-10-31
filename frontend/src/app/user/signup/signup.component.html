@@ -1,68 +1,85 @@
-<h1>SIGN UP</h1>
-<div class="col-md-8 col-md-offset-2">
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-
+<div class="container">
+  <div class="logo">
+    <img src="assets/logo.png" alt="LeLibre Logo" />
+  </div>
+  
+  <div class="welcome">
+    <h2>Bem-vindo à Biblioteca Virtual!</h2>
+    <p>
+      Olá Usuário! Faça o seu cadastro fornecendo o seu e-mail, senha. Caso tenha
+      alguma dúvida, sinta-se à vontade para entrar em contato com a equipe de
+      suporte.
+    </p>
+    
+  </div>
+  
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()" #cadastroForm="ngForm">
     <!-- Nome -->
     <div class="form-group">
-      <label for="firstName">Nome:</label><br/>
-      <input type="text" id="name" class="form-control" formControlName="nameTS">
+      <label for="nome">Nome:</label><br/>
+      <input type="text" id="nome" class="form-control" formControlName="nameTS" required />
     </div>
-    @if(myForm.get('nameTS')?.errors?.['required'] && myForm.get('nameTS')?.touched){
-        <div><p style="color: red;">NOME OBRIGATÓRIO</p></div>
-    }
+    <div *ngIf="myForm.get('nameTS')?.errors?.['required'] && myForm.get('nameTS')?.touched">
+      <p style="color: red;">NOME OBRIGATÓRIO</p>
+    </div>
     <br/>
     
+
+
     <!-- Email -->
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" id="email" class="form-control" formControlName="emailTS">
+      <input type="email" id="email" class="form-control" formControlName="emailTS" required />
     </div>
-    @if(myForm.get('emailTS')?.errors?.['required'] && myForm.get('emailTS')?.touched){
-        <div><p style="color: red;">EMAIL OBRIGATÓRIO</p></div>
-    }
-    @if(myForm.get('emailTS')?.errors?.['email'] && myForm.get('emailTS')?.touched){
-        <div><p style="color: red;">EMAIL INVÁLIDO</p></div>
-    }
+    <div *ngIf="myForm.get('emailTS')?.errors?.['required'] && myForm.get('emailTS')?.touched">
+      <p style="color: red;">EMAIL OBRIGATÓRIO</p>
+    </div>
+    <div *ngIf="myForm.get('emailTS')?.errors?.['email'] && myForm.get('emailTS')?.touched">
+      <p style="color: red;">EMAIL INVÁLIDO</p>
+    </div>
     <br/>
 
     <!-- Senha -->
     <div class="form-group">
-      <label for="pass">Senha:</label>
-      <input type="password" id="pass" class="form-control" formControlName="passwordTS">
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" class="form-control" formControlName="passwordTS" required />
     </div>
-    @if(myForm.get('passwordTS')?.errors?.['required'] && myForm.get('passwordTS')?.touched){
-        <div><p style="color: red;">SENHA OBRIGATÓRIA</p></div>
-    }
+    <div *ngIf="myForm.get('passwordTS')?.errors?.['required'] && myForm.get('passwordTS')?.touched">
+      <p style="color: red;">SENHA OBRIGATÓRIA</p>
+    </div>
     <br/>
 
     <!-- Confirmar Senha -->
     <div class="form-group">
-      <label for="confirmPass">Confirmar Senha:</label>
-      <input type="password" id="confirmPass" class="form-control" formControlName="confirmPasswordTS">
+      <label for="confirmacaoSenha">Confirmar Senha:</label>
+      <input type="password" id="confirmacaoSenha" class="form-control" formControlName="confirmPasswordTS" required />
     </div>
-    @if(myForm.errors?.['passwordMismatch'] && myForm.get('confirmPasswordTS')?.touched){
-        <div><p style="color: red;">AS SENHAS NÃO COINCIDEM</p></div>
-    }
+    <div *ngIf="myForm.errors?.['passwordMismatch'] && myForm.get('confirmPasswordTS')?.touched">
+      <p style="color: red;">AS SENHAS NÃO COINCIDEM</p>
+    </div>
     <br/>
 
     <!-- Termos de Uso -->
-    <div class="form-group">
-      <label>
-        <input type="checkbox" formControlName="termsAcceptedTS"> Eu aceito os Termos de Uso para me dedicar a programação
+    <div class="checkbox">
+      <input type="checkbox" id="termos" formControlName="termsAcceptedTS" required />
+      <label for="termos">
+        Li e concordo com as políticas de cadastro da Biblioteca Virtual Le Libre.
       </label>
     </div>
-
-    @if(myForm.get('termsAcceptedTS')?.errors?.['requiredTrue'] && myForm.get('termsAcceptedTS')?.touched){
-      <div><p style="color: red;">Você deve aceitar os Termos de Uso para continuar</p></div>
-    }
+    <div *ngIf="myForm.get('termsAcceptedTS')?.errors?.['requiredTrue'] && myForm.get('termsAcceptedTS')?.touched">
+      <p style="color: red;">Você deve aceitar os Termos de Uso para continuar</p>
+    </div>
     <br/>
 
     <!-- Botão de Enviar -->
     <br/>
     <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Cadastrar</button>
   </form>
+  
   <!-- Mensagem de sucesso exibida condicionalmente -->
   <div>
     {{ successMessage }}
   </div>
+
+  <p>já é membro do Lelibre? faça <button id="login" (click)="onLogin()">login</button></p>
 </div>

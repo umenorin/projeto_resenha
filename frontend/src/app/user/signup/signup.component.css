@@ -1,0 +1,76 @@
+.welcome{
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  .logo {
+    text-align: center;
+    color: #AD6BB7;
+  }
+  .logo h1 {
+    font-size: 24px;
+    margin: 5px 0;
+  }
+  .logo p {
+    font-size: 14px;
+    color: #4868DA;
+  }
+  .avatar img {
+    width: 80px;
+    height: 80px;
+  }
+  .avatar p {
+    font-size: 14px;
+    color: #666;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  label {
+    font-size: 14px;
+    text-align: left;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  .checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+  }
+  .checkbox input {
+    margin-right: 5px;
+  }
+  button {
+    background-color: #AD6BB7;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  button:disabled {
+    background-color: #ccc;
+  }
+  a {
+    margin-top: 20px;
+    color: #AD6BB7;
+  }
+  #login{
+    background-color: rgba(255, 255, 255, 0);
+    color: blue;
+    padding: 0;
+  }
