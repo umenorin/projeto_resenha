@@ -10,16 +10,17 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { CadastroComponent } from './user/cadastro.component';
-import { HeadersComponent } from './header.component';
+import { HeadersComponent } from './header.component'; // Certifique-se de que está importado
 import { AuthenticationComponent } from './user/login.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
     AppComponent,
     CadastroComponent,
-    HeadersComponent,
+    HeadersComponent, // Certifique-se de que está declarado aqui
     AuthenticationComponent,
     HomeComponent
   ],
@@ -35,7 +36,9 @@ import { AppRoutingModule } from './app-routing.module';
     MatButtonModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] // Adicione CUSTOM_ELEMENTS_SCHEMA aqui
 })

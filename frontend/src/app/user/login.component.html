@@ -1,6 +1,6 @@
 <div class="login-container">
   <div class="logo">
-    <img src="assets/logo.png" alt="Logo LELIBRE" />
+    <img src="../../assets/imagens/logo.jpg" alt="Logo LELIBRE" />
     <h1>LELIBRE</h1>
     <p>comunidade de leitores</p>
   </div>
@@ -11,10 +11,9 @@
     de onde parou. Sua jornada literária começa aqui.
   </p>
   <div class="icon">
-    <img src="assets/icon.png" alt="Mundo aberto em um livro" />
+    <img src="../../assets/imagens/icon.jpg" alt="Mundo aberto em um livro" />
   </div>
   <h3>Realize seu login</h3>
-
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <label for="email">E-mail</label>
     <input
@@ -34,7 +33,6 @@
         >Insira um e-mail válido.</span
       >
     </div>
-
     <label for="password">Senha</label>
     <input
       type="password"
@@ -52,7 +50,6 @@
         >O campo Senha é obrigatório.</span
       >
     </div>
-
     <button type="submit" class="register-button">Loga-se</button>
   </form>
 </div>

@@ -41,9 +41,11 @@ router.get('/:userId', async function (req, res, next) {
 
 // POST: Criar um novo usuário (agora com upload de foto de perfil)
 router.post('/', async function (req, res, next) {
+    console.log("Dados recebidos:", req.body); // Adicione este log para verificar o conteúdo do req.body
+
     const userObject = new User({
-        name: req.body.name,
-        password: req.body.password,
+        name: req.body.nome, // Corrigido para corresponder ao campo do formulário
+        password: req.body.senha, // Corrigido para corresponder ao campo do formulário
         email: req.body.email,
         bookAnalyst: req.body.bookAnalyst || []  
     });
@@ -51,18 +53,20 @@ router.post('/', async function (req, res, next) {
     console.log("Estou recebendo um novo usuário");
     try {
         const userSave = await userObject.save();
-        console.log(userSave);
+        console.log("Usuário salvo:", userSave); // Adicione este log para verificar o usuário salvo
         res.status(201).json({
             myMsgSucesso: "Usuário salvo com sucesso",
             objUserSave: userSave
         });
     } catch (err) {
+        console.error("Erro ao salvar usuário:", err); // Adicione este log para verificar o erro
         return res.status(500).json({
             myErrorTitle: "Serve-Side: Um erro aconteceu ao salvar o usuário",
-            myError: err
+            myError: err.message
         });
     }
 });
+
 
 // DELETE: Deletar um usuário pelo ID
 router.delete('/:id', async function (req, res, next) {

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -16,6 +15,7 @@ export class CadastroComponent {
   onSubmit(form: any) {
     if (form.valid) {
       this.isLoading = true;
+      console.log("Dados do formulário:", form.value); // Adicione este log para verificar os dados do formulário
       this.userService.register(form.value).subscribe(
         response => {
           this.isLoading = false;
