@@ -1,0 +1,35 @@
+<!-- src/app/home/home.component.html -->
+<div class="header">
+  <img src="assets/logo.png" alt="Logo" class="logo" />
+  <nav>
+    <button mat-button>Recomendados</button>
+    <button mat-button>Resenhas</button>
+    <button mat-button>Livros</button>
+  </nav>
+</div>
+
+<div class="search-container">
+  <mat-form-field class="search">
+    <input matInput placeholder="Pesquise nome do livro" [(ngModel)]="searchTerm" (input)="filterBooks(searchTerm)" />
+  </mat-form-field>
+
+  <mat-select placeholder="Filtros" (selectionChange)="filterBooks($event.value)">
+    <mat-option value="Literatura Brasileira">Literatura Brasileira</mat-option>
+    <mat-option value="Literatura Estrangeira">Literatura Estrangeira</mat-option>
+    <mat-option value="Literatura Infantil">Literatura Infantil</mat-option>
+  </mat-select>
+</div>
+
+<div *ngFor="let category of ['Literatura Brasileira', 'Literatura Estrangeira', 'Literatura Infantil']">
+  <h2>{{ category }}</h2>
+  <div class="book-container">
+    <ng-container *ngFor="let book of filteredBooks">
+      <ng-container *ngIf="book.category === category">
+        <div class="book">
+          <img [src]="book.coverImage" alt="{{ book.title }}" />
+          <p>{{ book.title }}</p>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
