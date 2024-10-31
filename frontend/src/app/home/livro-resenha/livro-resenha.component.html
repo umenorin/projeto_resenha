@@ -7,7 +7,7 @@
             <p>Editora: {{ book?.publisher }}</p>
             <!-- Estrelas de Avaliação -->
             <div class="rating-container">
-                <div class="rating-number">{{book.rating }}</div>
+                <div class="rating-number">{{ book?.rating | number: '1.1-1' }}</div>
                 <div class="rating-stars">
                     <div class="stars" [style.width.%]="(book?.rating || 0) * 20"> </div>
                 </div>

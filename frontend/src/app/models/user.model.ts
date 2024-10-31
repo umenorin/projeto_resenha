@@ -5,7 +5,7 @@ export class User{
         public name:string,
         public email:string,
         public password:string,
-
-        public bookAnalyst: BookAnalyst[]
+        public bookAnalyst: BookAnalyst[],
+        public id?:string
     ){}
 }

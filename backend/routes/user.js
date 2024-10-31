@@ -35,7 +35,7 @@ router.get('/', async function (req, res, next) {
 router.get('/:userId', async function (req, res, next) {
     const userId = req.params.userId
     try {
-        const users = await User.findById(userId).populate('bookAnalyst');
+        const users = await User.findById(userId).select('-password');
         res.status(200).json({
             myMsgSucesso: "Usuários recuperados com sucesso",
             objUsersRecuperados: users
@@ -90,7 +90,7 @@ router.post('/login', async function (req, res, next) {
     }
 
     // Gera o token
-    const token = jwt.sign({ id: user._id, name:user.name,bookAnalyst:user.bookAnalyst }, SECRET, { expiresIn: 500 });
+    const token = jwt.sign({ _id: user._id, name:user.name,bookAnalyst:user.bookAnalyst }, SECRET, { expiresIn: 1000 });
 
     // Responde com o token de autenticação
     return res.status(200).json({
@@ -188,7 +188,7 @@ router.get('/:userId/review',verifyJWT ,async function (req, res, next) {
     }
 });
 
-router.get('/:userId/review/:bookAId', async function (req, res, next) {
+router.get('/:userId/review/:bookAId',verifyJWT, async function (req, res, next) {
     try {
         const { userId, bookAId } = req.params;
         
@@ -225,7 +225,7 @@ router.get('/:userId/review/:bookAId', async function (req, res, next) {
 });
 
 
-router.post('/:userId/:bookId', async function (req, res, next) {
+router.post('/:userId/:bookId',verifyJWT, async function (req, res, next) {
     try {
         const userId = req.params.userId; 
         const bookId = req.params.bookId;
@@ -243,7 +243,8 @@ router.post('/:userId/:bookId', async function (req, res, next) {
             title,
             content,
             rating,
-            autor: user._id
+            autor: user._id,
+            book:book._id
         });
         book.rating = ((book.rating * book.bookAnalyst.length) +rating) / (book.bookAnalyst.length + 1)
         // Salva o novo `bookAnalyst`
@@ -267,7 +268,7 @@ router.post('/:userId/:bookId', async function (req, res, next) {
     }
 });
 
-router.patch('/:userId/review/:bookAId', async function (req, res, next) {
+router.patch('/:userId/review/:bookAId',verifyJWT, async function (req, res, next) {
     try {
         const { userId, bookAId } = req.params;
         const { title, content, rating } = req.body;
@@ -307,7 +308,7 @@ router.patch('/:userId/review/:bookAId', async function (req, res, next) {
     }
 });
 
-router.delete('/:userId/review/:bookAId', async function (req, res, next) {
+router.delete('/:userId/review/:bookAId',verifyJWT, async function (req, res, next) {
     try {
         const { userId, bookAId } = req.params;
 

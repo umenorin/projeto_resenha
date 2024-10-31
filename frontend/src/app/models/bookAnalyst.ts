@@ -8,7 +8,7 @@ export class BookAnalyst{
         public rating: Number,
         
         public autor: User,
-        public book: Book,
+        public book: string,
         
         public id?: string,
     ){}

@@ -5,6 +5,7 @@ import { Book } from '../../models/book.model';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { BookAnalystService } from '../../services/bookAnalystService';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-createbook-analyst',
@@ -26,14 +27,17 @@ export class CreatebookAnalystComponent {
     private route: ActivatedRoute,
     private bookService: BookService,
     private bookAnalystService: BookAnalystService,
+    private userService:UserService,
     private router: Router
   ) {
-      const currentUserString = localStorage.getItem('currentUser');
-      
-      if (currentUserString) {
-        const currentUser = JSON.parse(currentUserString);
-        this.currentUserId = currentUser.id;
-      }
+    const currentUserString = localStorage.getItem('currentUser');
+    if (currentUserString) {
+      const currentUser = JSON.parse(currentUserString);
+      this.currentUserId = currentUser._id;
+    } else {
+      console.error('Usuário não encontrado no localStorage');
+    }
+    
   }
 
   ngOnInit(): void {
@@ -68,10 +72,12 @@ export class CreatebookAnalystComponent {
         content: this.myForm.value.contentTS,
         rating: this.myForm.value.ratingTS,
       };
+      console.log("---- "+this.currentUserId)
       this.bookAnalystService.createBookAnalyst(this.currentUserId, this.book._id, newBookAnalyst).subscribe(
         response => {
           this.successMessage = 'Resenha cadastrada com sucesso!';
           setTimeout("",2000);
+          this.userService.getUser(this.currentUserId);
           this.router.navigate([`/home/livros/${this.book._id}`])
         },
         error => {

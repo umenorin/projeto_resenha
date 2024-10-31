@@ -19,7 +19,7 @@ export class ResenhaInformacaoComponent implements OnInit{
     console.log("RESENHA "+this.resenha);
     this.userService.getUser(this.resenha.autor).subscribe(
       (user: any) => {
-        this.autor = user.objUsersRecuperados; // Atribui o objeto User resolvido a this.author
+        this.autor = user; // Atribui o objeto User resolvido a this.author
         console.log('Autor carregado:', this.autor);
       },
       error => {

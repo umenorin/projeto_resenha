@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaço entre as resenhas */
+    justify-content: center; /* Centraliza o conteúdo */
+}
+
+
+
+.resenha-container {
+    flex: 0 0 calc(50% - 20px);
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  .resenha-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  
+  .resenha-title {
+    font-size: 1.8em;
+    color: #333;
+    margin: 0;
+    line-height: 1.4;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .resenha-author {
+    font-size: 1em;
+    color: #666;
+    margin-top: 8px;
+  }
+  
+  .resenha-rating {
+    font-size: 1.2em;
+    color: #ffb400;
+    margin-top: 4px;
+  }
+  
+  .resenha-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #444;
+  }
+  .book-container{
+    display: flex;
+  }
+  .book-info{
+    line-height: .5rem;
+    padding-top: 8px;
+    padding-left: 8px;
+  }
+  img {
+    height: 100px; /* Define a altura para 50 pixels */
+    width: auto; /* Mantém a proporção da imagem */
+  }
+  .btn-resenha{
+    background-color: #00000000;
+    border-radius: 10px;
+    border: 2px solid #5575DF;
+    height: 1.5rem;
+  }
+  .btn-resenha:hover{
+    background-color: #5575DF;
+    border-radius: 10px;
+    border: 2px solid black;
+  }

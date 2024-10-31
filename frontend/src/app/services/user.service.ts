@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 import { map,tap } from 'rxjs/operators';
@@ -19,13 +19,36 @@ export class UserService{
         this._currentUser.next(storedUser); // Se já estiver logado, emite o usuário
         }
     }
-    getUser(id:string): Observable<User> {
-        return this.http.get<User>(this.baseUrl+`/${id}`);
-      }
+    private getAuthHeaders(): HttpHeaders {
+      const token = localStorage.getItem('token'); // Obtém o token do localStorage
+      return new HttpHeaders({
+        'x-access-token': token || '' // Define o token no cabeçalho 'x-access-token'
+      });
+    }
+
+    getUser(id: string): Observable<User> {
+      return this.http.get<{ objUsersRecuperados: User }>(`${this.baseUrl}/${id}`,).pipe(
+        map(response => {
+          const user = response.objUsersRecuperados;
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          return user;
+        }),
+        tap(user => console.log("Dados do usuário recuperado:", user))
+      );
+    }
     createUser(user: User): Observable<User> {
         return this.http.post<User>(`${this.baseUrl}`, user);
     }
 
+    getBookAnalysts(userId:string): Observable<any>{
+      return this.http.get<{ objReviewsRecuperados: User }>(`${this.baseUrl}/${userId}/review`,{ headers: this.getAuthHeaders() }).pipe(
+        map(response => {
+          const bookAnalystList = response.objReviewsRecuperados;
+          return bookAnalystList;
+        }),
+        tap(bookAnalystList => console.log("Dados das resenhas recuperado:", bookAnalystList))
+      );
+    }
 
     login(email: string, password: string): Observable<{ token: string }> {
         console.log("Método login chamado no UserService");
