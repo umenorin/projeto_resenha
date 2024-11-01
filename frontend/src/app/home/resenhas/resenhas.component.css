@@ -4,8 +4,16 @@
     gap: 20px; /* Espaço entre as resenhas */
     justify-content: center; /* Centraliza o conteúdo */
 }
-
-
+.button-container{
+  display: flex;
+  gap: 10px;
+justify-content: right;}
+.close-button ,.edit-button{
+  width: auto;
+  height: 25px;
+  top:0;
+  right: 0;
+}
 
 .resenha-container {
     flex: 0 0 calc(50% - 20px);
@@ -75,4 +83,8 @@
     background-color: #5575DF;
     border-radius: 10px;
     border: 2px solid black;
+  }
+  button{
+    background-color: #ff000000;
+    border-radius: 10px;
   }

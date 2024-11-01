@@ -10,6 +10,6 @@ export class BookAnalyst{
         public autor: User,
         public book: string,
         
-        public id?: string,
+        public _id?: string,
     ){}
 }

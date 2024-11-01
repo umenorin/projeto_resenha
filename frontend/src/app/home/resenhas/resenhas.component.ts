@@ -5,6 +5,7 @@ import { BookAnalyst } from '../../models/bookAnalyst';
 import { Book } from '../../models/book.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { BookAnalystService } from '../../services/bookAnalystService';
 
 @Component({
   selector: 'app-resenhas',
@@ -15,33 +16,33 @@ import { Router } from '@angular/router';
 })
 export class ResenhasComponent implements OnInit {
   public bookAnalystList: BookAnalyst[] = [];
-  public bookList: Book[] = []; // Nova lista para armazenar livros
-  public booksMap: { [key: string]: Book } = {}; // Armazena cada livro pelo ID
+  public bookList: Book[] = []; 
+  public booksMap: { [key: string]: Book } = {}; 
+  private _userId:string ="";
 
   constructor(
     private userService: UserService,
     private bookService: BookService,
+    private bookAnalytService: BookAnalystService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     const storedUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     if (storedUser && storedUser._id) {
+      this._userId = storedUser._id;
       this.userService.getBookAnalysts(storedUser._id).subscribe(
         (bookAnalysts: BookAnalyst[]) => {
           this.bookAnalystList = bookAnalysts;
           console.log('Lista de bookAnalyst:', this.bookAnalystList);
 
-          // Inicializa a bookList com o mesmo tamanho que bookAnalystList
           this.bookList = new Array(this.bookAnalystList.length);
 
-          // Para cada analyst, buscar o livro pelo ID
           this.bookAnalystList.forEach((analyst, index) => {
             this.bookService.getBook(analyst.book).subscribe(
               (book: any) => {
-                this.booksMap[analyst.book] = book.objSMessageSRecuperadoS; // Armazena o livro com o ID
-                this.bookList[index] = book.objSMessageSRecuperadoS; // Adiciona o livro na mesma posição
-                console.log(this.bookList[index])
+                this.booksMap[analyst.book] = book.objSMessageSRecuperadoS;
+                this.bookList[index] = book.objSMessageSRecuperadoS;
               },
               error => {
                 console.error('Erro ao carregar o livro:', error);
@@ -58,7 +59,31 @@ export class ResenhasComponent implements OnInit {
     }
   }
 
-  verLivro(id:string){
-    this.router.navigate([`/home/livros/${id}`])
+  verLivro(id?: string) {
+    this.router.navigate([`/home/livros/${id}`]);
+  }
+
+  editReview(bookAnalystId: string) {
+    console.log("Editando resenha com ID:", bookAnalystId);
+    // Redireciona para a página de edição ou abre um modal de edição
+    this.router.navigate([`/home/edit-resenha/${bookAnalystId}`]);
+  }
+
+  deleteReview(bookAnalystId: string) {
+    const confirmation = confirm("Você tem certeza que deseja deletar esta resenha?");
+    
+    if (confirmation) {
+      this.bookAnalytService.deleteBookAnalyst(this._userId, bookAnalystId).subscribe(
+        () => {
+          console.log("Resenha deletada com sucesso.");
+          this.bookAnalystList = this.bookAnalystList.filter(item => item._id !== bookAnalystId);
+        },
+        error => {
+          console.error("Erro ao deletar a resenha:", error);
+        }
+      );
+    } else {
+      console.log("Ação de exclusão cancelada.");
+    }
   }
 }

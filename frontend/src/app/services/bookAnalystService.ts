@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BookAnalyst } from '../models/bookAnalyst';
 import { map,tap } from 'rxjs/operators';
+import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class BookAnalystService {
@@ -24,5 +25,9 @@ export class BookAnalystService {
 
   createBookAnalyst(userId: string, bookId: string, data: any): Observable<BookAnalyst> {
     return this.http.post<BookAnalyst>(`${this.baseUrl}user/${userId}/${bookId}`, data, { headers: this.getAuthHeaders() });
+  }
+
+  deleteBookAnalyst(userId:string,bookAnalystId:string){
+    return this.http.delete<any>(`${this.baseUrl}bookAnalyst/${userId}/${bookAnalystId}`, { headers: this.getAuthHeaders() })
   }
 }

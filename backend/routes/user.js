@@ -188,7 +188,7 @@ router.get('/:userId/review',verifyJWT ,async function (req, res, next) {
     }
 });
 
-router.get('/:userId/review/:bookAId',verifyJWT, async function (req, res, next) {
+router.get('/:userId/:bookAId',verifyJWT, async function (req, res, next) {
     try {
         const { userId, bookAId } = req.params;
         
@@ -303,52 +303,6 @@ router.patch('/:userId/review/:bookAId',verifyJWT, async function (req, res, nex
     } catch (err) {
         return res.status(500).json({
             myErrorTitle: "Serve-Side: Um erro aconteceu ao atualizar a resenha",
-            myError: err.message
-        });
-    }
-});
-
-router.delete('/:userId/review/:bookAId',verifyJWT, async function (req, res, next) {
-    try {
-        const { userId, bookAId } = req.params;
-
-        // Busca o usuário e verifica se a resenha pertence a ele
-        const user = await User.findById(userId).populate('bookAnalyst');
-        if (!user) {
-            return res.status(404).json({
-                myErrorTitle: "Usuário não encontrado",
-                myError: "O ID fornecido não corresponde a nenhum usuário."
-            });
-        }
-
-        // Remove a resenha da coleção de resenhas do usuário e a exclui
-        const bookAnalyst = await BookAnalyst.findOneAndDelete({ _id: bookAId, autor: userId });
-        if (!bookAnalyst) {
-            return res.status(404).json({
-                myErrorTitle: "Resenha não encontrada",
-                myError: "A resenha especificada não foi encontrada para este usuário."
-            });
-        }
-
-        // Remove a resenha do array do usuário e salva o usuário atualizado
-        user.bookAnalyst = user.bookAnalyst.filter(
-            (reviewId) => reviewId.toString() !== bookAId
-        );
-        await user.save();
-
-        // Remove a resenha do array do livro associado
-        const book = await Book.findOneAndUpdate(
-            { bookAnalyst: bookAId },
-            { $pull: { bookAnalyst: bookAId } }
-        );
-
-        res.status(200).json({
-            myMsgSucesso: "Resenha removida com sucesso",
-            objReviewRemovido: bookAnalyst
-        });
-    } catch (err) {
-        return res.status(500).json({
-            myErrorTitle: "Serve-Side: Um erro aconteceu ao remover a resenha",
             myError: err.message
         });
     }

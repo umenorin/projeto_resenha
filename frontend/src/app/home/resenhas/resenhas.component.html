@@ -1,24 +1,32 @@
 <div class="container" *ngIf="bookAnalystList.length; else noReviews">
-    <div *ngFor="let analyst of bookAnalystList; let i = index" class="resenha-container">
-      <div class="resenha-header">
-        <h2 class="resenha-title">{{ analyst.title }}</h2>
-        <p class="resenha-author">Por: Você</p>
-        <span class="resenha-rating">Avaliação: {{ analyst.rating }} ★</span>
-      </div>
-      
-      <div class="resenha-content">
-        <p>{{ analyst.content }}</p>
-      </div>
+  <div *ngFor="let analyst of bookAnalystList; let i = index" class="resenha-container">
+    <div class="resenha-header">
+      <h2 class="resenha-title">{{ analyst.title }}</h2>
+      <p class="resenha-author">Por: Você</p>
+      <span class="resenha-rating">Avaliação: {{ analyst.rating }} ★</span>
+    </div>
     
-      <h3>Informações do Livro</h3>
-      <div class="book-container" *ngIf="bookList[i]">
-        <img [src]="bookList[i]?.img" alt="{{ bookList[i].title }}" class="book-img" />
-        <div class="book-info">
-            <p>Título: {{ bookList[i].title }}</p>
-            <p>Autor: {{ bookList[i].author }}</p>
-            <button class="btn-resenha" (click)="verLivro(bookList[i]._id)" >Ver Livro</button>
-        </div>
+    <div class="resenha-content">
+      <p>{{ analyst.content }}</p>
+    </div>
+    <h3>Informações do Livro</h3>
+    <div class="book-container" *ngIf="bookList[i]">
+      <img [src]="bookList[i]?.img" alt="{{ bookList[i].title }}" class="book-img" />
+      <div class="book-info">
+        <p>Título: {{ bookList[i].title }}</p>
+        <p>Autor: {{ bookList[i].author }}</p>
+        <button class="btn-resenha" (click)="verLivro(bookList[i]._id)" >Ver Livro</button>
       </div>
+    </div>
+    <div class="button-container">
+      <button *ngIf="analyst._id" (click)="editReview(analyst._id)">
+        <img class="edit-button" src="../../../assets/edit_symbol.png" alt="" />
+      </button>
+      <button *ngIf="analyst._id" (click)="deleteReview(analyst._id)">
+        <img class="close-button" src="../../../assets/close_symbol.png" alt="" />
+      </button>
+    </div>
+    
     </div>
   </div>
   
