@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from './../services/auth.service'; // Importe o serviço AuthService
+import { AuthService } from './../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -21,15 +21,16 @@ export class AuthenticationComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe((isLoggedIn) => {
-        if (isLoggedIn) {
+      this.authService.login(email, password).subscribe(
+        (response) => {
           console.log('Login bem-sucedido!');
           this.router.navigate(['/home']); // Redireciona para a página inicial após o login bem-sucedido
-        } else {
-          console.log('Login falhou!');
+        },
+        (error) => {
+          console.log('Login falhou!', error);
           // Exibir mensagem de erro ou tomar outra ação
         }
-      });
+      );
     } else {
       this.loginForm.markAllAsTouched(); // Marca todos os campos para exibir as mensagens de erro
     }

@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CadastroComponent } from './user/cadastro.component';
+import { HomeComponent } from './home/home.component';
 import { AuthenticationComponent } from './user/login.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.components';
+import { CadastroComponent } from './user/cadastro.component';
 
 const routes: Routes = [
-  { path: 'cadastro', component: CadastroComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: AuthenticationComponent },
-  { path: '', redirectTo: '/cadastro', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'cadastro', component: CadastroComponent },
+  // Outras rotas...
 ];
 
 @NgModule({

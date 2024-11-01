@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private mockUser = {
-    email: 'test@example.com',
-    password: 'password123'
-  };
+  private apiUrl = 'http://localhost:3000/user/signin'; // Certifique-se de que esta URL está correta
 
-  login(email: string, password: string): Observable<boolean> {
-    if (email === this.mockUser.email && password === this.mockUser.password) {
-      return of(true); // Simula um login bem-sucedido
-    } else {
-      return of(false); // Simula um login falho
-    }
+  constructor(private http: HttpClient) {}
+
+  login(email: string, password: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl, { email, password });
   }
 }
