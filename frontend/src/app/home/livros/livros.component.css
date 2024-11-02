@@ -1,0 +1,38 @@
+.body{
+    background-color: #F3F4F6;
+    padding: 0px 20px;
+}
+.book-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.book-item {
+    flex: 1 1 30%; /* Faz com que cada item ocupe cerca de 30% do contêiner */
+    max-width: 30%; /* Garante que cada item não ultrapasse 30% da largura */
+    box-sizing: border-box; /* Inclui o padding e a borda na largura total */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+  
+  /* O restante do seu CSS permanece o mesmo */
+  .book-img {
+    width: 145px;
+    height: 218px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .book-item p {
+    margin: auto;
+    max-width: 150px; 
+    white-space: normal; 
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+a {
+    text-decoration: none;
+    color: black;
+}

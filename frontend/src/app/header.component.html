@@ -1,9 +1,11 @@
-<div class="line"></div>
+<div class="line"> 
+<button class="button" (click)="logout()">logout</button>
+</div>
 <img src="../assets/logo.png" alt="logo">
 <nav>
     <ul>
         <li>
-            <a class="nav-link" [routerLink]="['/home/recomendacao']" routerLinkActive="active">Recomendados</a>
+            <a  class="nav-link" [routerLink]="['/home/recomendacao']" routerLinkActive="active">Recomendados</a>
         </li>
         <li><a class="nav-link" [routerLink]="['/home/resenhas']" routerLinkActive="active">Resenhas</a></li>
         <li><a class="nav-link" [routerLink]="['/home/livros']" routerLinkActive="active">Livros</a></li>

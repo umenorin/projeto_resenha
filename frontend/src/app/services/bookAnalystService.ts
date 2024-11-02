@@ -30,4 +30,8 @@ export class BookAnalystService {
   deleteBookAnalyst(userId:string,bookAnalystId:string){
     return this.http.delete<any>(`${this.baseUrl}bookAnalyst/${userId}/${bookAnalystId}`, { headers: this.getAuthHeaders() })
   }
+
+  updateBookAnalyst(userId: string,bookAnalystId:string,data: any): Observable<BookAnalyst> {
+    return this.http.patch<BookAnalyst>(`${this.baseUrl}bookAnalyst/${userId}/${bookAnalystId}`, data,{ headers: this.getAuthHeaders() });
+  }
 }

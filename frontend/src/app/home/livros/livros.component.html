@@ -1,1 +1,12 @@
-<p>livros works!</p>
+<div class="body">
+    <h2>Livros</h2>
+    <div class="book-container">
+        <div *ngFor="let book of booksList" class="book-item">
+            <a [routerLink]="['/home/livros', book._id]"> <!-- Usando o routerLink para navegação -->
+                <img [src]="book.img" alt="{{ book.title }}" class="book-img" />
+                <p>{{ book.title }}</p>
+            </a>
+        </div>
+    </div>
+  
+</div>

@@ -66,7 +66,7 @@ export class ResenhasComponent implements OnInit {
   editReview(bookAnalystId: string) {
     console.log("Editando resenha com ID:", bookAnalystId);
     // Redireciona para a página de edição ou abre um modal de edição
-    this.router.navigate([`/home/edit-resenha/${bookAnalystId}`]);
+    this.router.navigate([`/home/update//${this._userId}/${bookAnalystId}`]);
   }
 
   deleteReview(bookAnalystId: string) {
