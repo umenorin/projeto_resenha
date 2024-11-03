@@ -29,4 +29,8 @@ export class BookService {
   addBook(book: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, book);
   }
+  // Os livros recomendados são obtidos a partir da API do backend
+  getRecommendedBooks(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/recommended`);
+  }
 }

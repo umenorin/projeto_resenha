@@ -1,0 +1,12 @@
+<div class="recomendados-container">
+    <h2>Livros Recomendados</h2>
+    
+    <div class="books-grid">
+      <div *ngFor="let book of recommendedBooks" class="book-card">
+        <img [src]="book.imageUrl" alt="{{ book.title }}" />
+        <p>{{ book.title }}</p>
+        <p>{{ book.author }}</p>
+      </div>
+    </div>
+  </div>
+  

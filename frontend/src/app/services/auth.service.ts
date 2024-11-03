@@ -13,4 +13,9 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(this.apiUrl, { email, password });
   }
+
+  isLoggedIn(): boolean {
+    // Implement your logic to check if the user is logged in
+    return !!localStorage.getItem('token'); // Example implementation
+  }
 }
