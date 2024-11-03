@@ -1,19 +1,36 @@
 var app = require('../app');
-
 var debug = require('debug')('node-rest:server');
-
 const http = require("http");
+const { exec } = require("child_process");
+
+const startMongoDB = () => {
+  const mongoPath = `"C:\\Program Files\\MongoDB\\Server\\8.0\\bin\\mongod.exe"`;
+  const dbPath = `"E:\\UVV\\6° Periodo\\ProgramacaoWEB\\projeto_resenha\\backend\\data\\db"`;
+
+  // Comando para iniciar o MongoDB com o caminho do diretório de dados
+  exec(`${mongoPath} --dbpath ${dbPath}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Erro ao iniciar o MongoDB: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.error(`stderr do MongoDB: ${stderr}`);
+      return;
+    }
+    console.log(`MongoDB stdout: ${stdout}`);
+  });
+};
+
+startMongoDB(); // Chama a função para iniciar o MongoDB
 
 const normalizePort = val => {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
-    // named pipe 
     return val;
   }
 
   if (port >= 0) {
-    // port number
     return port;
   }
 

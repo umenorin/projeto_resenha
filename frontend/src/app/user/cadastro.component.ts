@@ -15,7 +15,7 @@ export class CadastroComponent {
   onSubmit(form: any) {
     if (form.valid) {
       this.isLoading = true;
-      console.log("Dados do formulário:", form.value); // Adicione este log para verificar os dados do formulário
+      console.log("Dados do formulário:", form.value);
       this.userService.register(form.value).subscribe(
         response => {
           this.isLoading = false;

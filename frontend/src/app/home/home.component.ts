@@ -4,19 +4,19 @@ import { BookService } from './../services/book.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   books: any = [];
   filteredBooks: any = [];
-  searchTerm: string = ''; // Adicione a propriedade searchTerm
+  searchTerm: string = '';
 
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
     this.bookService.getBooks().subscribe((data) => {
-      this.books = data.objBooksRecuperados; // Certifique-se de que está acessando a propriedade correta
-      this.filteredBooks = data.objBooksRecuperados; // Inicializa os livros filtrados
+      this.books = data.objBooksRecuperados;
+      this.filteredBooks = data.objBooksRecuperados;
     });
   }
 

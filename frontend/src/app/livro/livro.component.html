@@ -1,0 +1,62 @@
+<div class="livros-container">
+    <header class="header">
+        <img src="assets/logo.png" alt="Logo" class="logo">
+        <nav class="menu">
+            <a routerLink="/recomendados">Recomendados</a>
+            <a routerLink="/resenhas">Resenhas</a>
+            <a routerLink="/livros">Livros</a>
+        </nav>
+    </header>
+    
+    <h1 class="titulo">Livros</h1>
+    
+    <div class="livros-grid">
+        <div *ngFor="let livro of livros" class="livro-card">
+            <img [src]="livro.imageUrl" alt="{{livro.title}}" class="livro-imagem">
+            <h2 class="livro-titulo">{{ livro.title }}</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Cadastre um novo livro</h2>
+        <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+            <label for="title">Título:</label>
+            <input id="title" type="text" formControlName="title" required />
+            <div *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched">
+                <small class="error">Título é obrigatório.</small>
+            </div>
+
+            <label for="author">Autor:</label>
+            <input id="author" type="text" formControlName="author" required />
+            <div *ngIf="bookForm.get('author')?.invalid && bookForm.get('author')?.touched">
+                <small class="error">Autor é obrigatório.</small>
+            </div>
+
+            <label for="edition">Edição:</label>
+            <input id="edition" type="text" formControlName="edition" required />
+            <div *ngIf="bookForm.get('edition')?.invalid && bookForm.get('edition')?.touched">
+                <small class="error">Edição é obrigatória.</small>
+            </div>
+
+            <label for="publisher">Editora:</label>
+            <input id="publisher" type="text" formControlName="publisher" required />
+            <div *ngIf="bookForm.get('publisher')?.invalid && bookForm.get('publisher')?.touched">
+                <small class="error">Editora é obrigatória.</small>
+            </div>
+
+            <label for="gender">Gênero:</label>
+            <input id="gender" type="text" formControlName="gender" required />
+            <div *ngIf="bookForm.get('gender')?.invalid && bookForm.get('gender')?.touched">
+                <small class="error">Gênero é obrigatório.</small>
+            </div>
+
+            <label for="imageUrl">URL da Imagem:</label>
+            <input id="imageUrl" type="text" formControlName="imageUrl" required />
+            <div *ngIf="bookForm.get('imageUrl')?.invalid && bookForm.get('imageUrl')?.touched">
+                <small class="error">URL da Imagem é obrigatória.</small>
+            </div>
+
+            <button type="submit" [disabled]="bookForm.invalid">Cadastrar</button>
+        </form>
+    </div>
+</div>

@@ -39,7 +39,7 @@ router.get('/:userId', async function (req, res, next) {
     }
 });
 
-// POST: Criar um novo usuário (agora com upload de foto de perfil)
+// POST: Criar um novo usuário
 router.post('/', async function (req, res, next) {
     console.log("Dados recebidos:", req.body); // Adicione este log para verificar o conteúdo do req.body
 

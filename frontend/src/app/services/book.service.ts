@@ -1,4 +1,3 @@
-// src/app/services/book.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -24,5 +23,10 @@ export class BookService {
   // Pega todas as análises de um livro pelo bookId
   getAllReviews(bookId: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${bookId}/review`);
+  }
+
+  // Adiciona um novo livro
+  addBook(book: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, book);
   }
 }

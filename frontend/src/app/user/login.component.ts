@@ -11,7 +11,7 @@ import { AuthService } from './../services/auth.service';
 export class AuthenticationComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { // Injeção do serviço AuthService
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -24,15 +24,14 @@ export class AuthenticationComponent {
       this.authService.login(email, password).subscribe(
         (response) => {
           console.log('Login bem-sucedido!');
-          this.router.navigate(['/home']); // Redireciona para a página inicial após o login bem-sucedido
+          this.router.navigate(['/home']);
         },
         (error) => {
           console.log('Login falhou!', error);
-          // Exibir mensagem de erro ou tomar outra ação
         }
       );
     } else {
-      this.loginForm.markAllAsTouched(); // Marca todos os campos para exibir as mensagens de erro
+      this.loginForm.markAllAsTouched();
     }
   }
 }

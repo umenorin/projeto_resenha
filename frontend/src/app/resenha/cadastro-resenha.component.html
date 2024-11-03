@@ -1,0 +1,48 @@
+<div class="header">
+    <img src="../../assets/imagens/logo2.jpg" alt="Logo" class="logo" />
+    <nav>
+      <button mat-button routerLink="/recomendados">Recomendados</button>
+      <button mat-button routerLink="/resenhas">Resenhas</button>
+      <button mat-button routerLink="/livros">Livros</button>
+    </nav>
+  </div>
+  
+  <div class="container">
+    <h2>Publique sua resenha</h2>
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+      <label for="book">Livro:</label>
+      <input id="book" type="text" formControlName="book" aria-label="Livro" required />
+      <div *ngIf="reviewForm.get('book')?.invalid && reviewForm.get('book')?.touched">
+        <small class="error">Livro é obrigatório.</small>
+      </div>
+  
+      <label for="author">Autor:</label>
+      <input id="author" type="text" formControlName="author" aria-label="Autor" required />
+      <div *ngIf="reviewForm.get('author')?.invalid && reviewForm.get('author')?.touched">
+        <small class="error">Autor é obrigatório.</small>
+      </div>
+  
+      <label for="edition">Edição:</label>
+      <input id="edition" type="text" formControlName="edition" aria-label="Edição" />
+  
+      <label for="publisher">Editora:</label>
+      <input id="publisher" type="text" formControlName="publisher" aria-label="Editora" />
+  
+      <label for="keywords">Palavras Chave:</label>
+      <textarea id="keywords" formControlName="keywords" aria-label="Palavras Chave"></textarea>
+  
+      <label for="genre">Gênero:</label>
+      <select id="genre" formControlName="genre" aria-label="Gênero">
+        <option value="">Selecione o gênero</option>
+        <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+      </select>
+  
+      <label for="content">Resenha:</label>
+      <textarea id="content" formControlName="content" aria-label="Resenha" required></textarea>
+      <div *ngIf="reviewForm.get('content')?.invalid && reviewForm.get('content')?.touched">
+        <small class="error">Resenha é obrigatória.</small>
+      </div>
+  
+      <button type="submit" [disabled]="reviewForm.invalid">Publicar</button>
+    </form>
+  </div>
